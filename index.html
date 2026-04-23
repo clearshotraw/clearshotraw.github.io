@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-
-  <!-- ✅ FIXED VIEWPORT + IOS SAFE AREA -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
   <meta name="theme-color" content="#0b0c0b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -42,7 +43,6 @@
       --my: 50%;
     }
 
-    /* ✅ FIXED BACKGROUND TO FILL ENTIRE SCREEN */
     html {
       width: 100%;
       min-height: 100%;
@@ -56,17 +56,14 @@
         linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 28%, var(--bg-3) 68%, var(--bg-4) 100%);
       background-repeat: no-repeat;
       background-size: cover;
-      background-attachment: fixed;
     }
 
     body {
       width: 100%;
       min-height: 100dvh;
       overflow-x: hidden;
-      font-family: "Inter", sans-serif;
+      font-family: "Inter", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
       color: var(--cream);
-
-      /* SAME BACKGROUND (prevents cutoff) */
       background:
         radial-gradient(circle at 16% 22%, rgba(244, 239, 230, 0.09), transparent 22%),
         radial-gradient(circle at 30% 70%, rgba(244, 239, 230, 0.05), transparent 20%),
@@ -75,11 +72,80 @@
         linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 28%, var(--bg-3) 68%, var(--bg-4) 100%);
       background-repeat: no-repeat;
       background-size: cover;
-      background-attachment: fixed;
-
+      position: relative;
+      isolation: isolate;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    .ambient {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient.a1 {
+      width: 26rem;
+      height: 26rem;
+      top: -9rem;
+      left: -7rem;
+      background: rgba(244, 239, 230, 0.07);
+    }
+
+    .ambient.a2 {
+      width: 22rem;
+      height: 22rem;
+      right: -6rem;
+      bottom: -7rem;
+      background: rgba(168, 180, 163, 0.12);
+    }
+
+    .ambient.a3 {
+      width: 18rem;
+      height: 18rem;
+      right: 10rem;
+      top: 3rem;
+      background: rgba(255, 255, 255, 0.03);
+      filter: blur(80px);
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb.o1 {
+      width: 13rem;
+      height: 13rem;
+      top: -3rem;
+      right: 6rem;
+      opacity: 0.3;
+    }
+
+    .orb.o2 {
+      width: 9rem;
+      height: 9rem;
+      bottom: 4rem;
+      right: 9rem;
+      opacity: 0.2;
+    }
+
+    .orb.o3 {
+      width: 7rem;
+      height: 7rem;
+      left: -1rem;
+      bottom: 3rem;
+      opacity: 0.14;
+      background: rgba(168, 180, 163, 0.06);
     }
 
     .hero {
@@ -87,7 +153,7 @@
       z-index: 1;
       width: min(100%, 72rem);
       padding: 2rem;
-      padding-bottom: calc(2rem + env(safe-area-inset-bottom)); /* ✅ FIX */
+      padding-bottom: calc(2rem + env(safe-area-inset-bottom));
       display: flex;
       align-items: center;
       justify-content: center;
@@ -121,75 +187,259 @@
 
     .brand-main {
       font-size: clamp(3.2rem, 8vw, 6.4rem);
+      line-height: 0.95;
       font-weight: 700;
+      letter-spacing: -0.055em;
+      color: var(--cream);
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.1);
     }
 
     .raw-glass {
-      padding: 0.12em 0.36em;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 1.12em;
+      padding: 0.12em 0.36em 0.16em;
       border-radius: 0.34em;
-      backdrop-filter: blur(20px);
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.16);
+      overflow: hidden;
+      color: rgba(244, 239, 230, 0.97);
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: 0.95;
+      font-weight: 700;
+      letter-spacing: -0.055em;
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.14),
+        inset 0 -1px 0 rgba(255,255,255,0.04),
+        0 18px 40px rgba(0,0,0,0.20);
+    }
+
+    .raw-glass::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background:
+        radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,0.25), transparent 22%),
+        linear-gradient(130deg, rgba(255,255,255,0.15), rgba(255,255,255,0.02) 42%, rgba(168,180,163,0.08) 100%);
+      pointer-events: none;
+      mix-blend-mode: screen;
+      transition: background 0.08s linear;
+    }
+
+    .raw-glass::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: inherit;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), transparent 38%, rgba(0,0,0,0.08) 100%);
+      pointer-events: none;
     }
 
     .tagline {
-      margin-bottom: 2rem;
+      font-size: clamp(1.04rem, 1.9vw, 1.35rem);
+      line-height: 1.35;
       color: var(--soft-cream);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-family: "Inter", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
     .button-row {
       display: flex;
-      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-bottom: 1.7rem;
     }
 
     .glass-btn,
     .solid-btn {
-      padding: 1rem 1.4rem;
-      border-radius: 999px;
-      cursor: pointer;
+      appearance: none;
       border: none;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 8.4rem;
+      padding: 0.95rem 1.35rem;
+      border-radius: 999px;
+      font-size: 0.97rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.10),
+        0 14px 34px rgba(0,0,0,0.14);
+      transition:
+        transform 0.22s ease,
+        opacity 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease,
+        border-color 0.22s ease;
+      text-decoration: none;
+    }
+
+    .glass-btn::before,
+    .solid-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,0.16), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02));
+      pointer-events: none;
+      opacity: 0.9;
+      transition: opacity 0.22s ease;
     }
 
     .glass-btn {
+      color: rgba(244, 239, 230, 0.92);
       background: rgba(255,255,255,0.06);
-      color: white;
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(16px) saturate(140%);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
     }
 
     .solid-btn {
-      background: #f4efe6;
-      color: black;
+      color: #171817;
+      background:
+        linear-gradient(180deg, rgba(244,239,230,0.98), rgba(236,230,220,0.92));
+      border: 1px solid rgba(255,255,255,0.32);
+    }
+
+    .glass-btn:hover,
+    .solid-btn:hover {
+      transform: translateY(-2px) scale(1.015);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.12),
+        0 20px 42px rgba(0,0,0,0.22);
+    }
+
+    .glass-btn:hover {
+      background: rgba(255,255,255,0.085);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .solid-btn:hover {
+      background:
+        linear-gradient(180deg, rgba(248,244,238,1), rgba(240,234,224,0.96));
+    }
+
+    .glass-btn:active,
+    .solid-btn:active {
+      transform: translateY(0) scale(0.99);
     }
 
     .bottom-mark {
       position: absolute;
-      bottom: calc(1rem + env(safe-area-inset-bottom)); /* ✅ FIX */
       left: 50%;
+      bottom: calc(1rem + env(safe-area-inset-bottom));
       transform: translateX(-50%);
       font-size: 0.7rem;
-      color: rgba(244,239,230,0.4);
+      color: rgba(244, 239, 230, 0.42);
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      z-index: 2;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 1.25rem;
+        padding-bottom: calc(1.25rem + env(safe-area-inset-bottom));
+      }
+
+      .eyebrow {
+        margin-bottom: 1rem;
+        letter-spacing: 0.24em;
+      }
+
+      .brand-row {
+        gap: 0.45rem;
+      }
+
+      .tagline {
+        margin-bottom: 1.5rem;
+      }
+
+      .button-row {
+        gap: 0.7rem;
+      }
+
+      .glass-btn,
+      .solid-btn {
+        min-width: 7.5rem;
+        padding: 0.88rem 1.15rem;
+      }
     }
   </style>
 </head>
-
 <body>
+  <div class="ambient a1"></div>
+  <div class="ambient a2"></div>
+  <div class="ambient a3"></div>
+
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+
   <main class="hero">
     <div class="hero-inner">
       <div class="eyebrow">Photography Portfolio</div>
 
       <div class="brand-row">
         <div class="brand-main">CLEARSHOT</div>
-        <div class="raw-glass">RAW</div>
+        <div class="raw-glass" id="rawGlass">RAW</div>
       </div>
 
       <p class="tagline">Your vision, but better.</p>
 
       <div class="button-row">
-        <a href="pictures.html"><button class="glass-btn">Pictures</button></a>
-        <a href="booking.html"><button class="solid-btn">Booking</button></a>
+        <a href="pictures.html" class="glass-btn">Pictures</a>
+        <a href="booking.html" class="solid-btn">Booking</a>
       </div>
     </div>
   </main>
 
   <div class="bottom-mark">© 2026 CLEARSHOT RAW</div>
+
+  <script>
+    const root = document.documentElement;
+    const interactive = document.querySelectorAll('.raw-glass, .glass-btn, .solid-btn');
+
+    window.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      root.style.setProperty('--mx', x + '%');
+      root.style.setProperty('--my', y + '%');
+    });
+
+    interactive.forEach((el) => {
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        el.style.setProperty('--mx', x + '%');
+        el.style.setProperty('--my', y + '%');
+      });
+
+      el.addEventListener('mouseleave', () => {
+        el.style.setProperty('--mx', '50%');
+        el.style.setProperty('--my', '50%');
+      });
+    });
+  </script>
 </body>
 </html>
