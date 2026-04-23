@@ -11,193 +11,182 @@
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
-      background: #050505;
-      color: #ffffff;
+      min-height: 100vh;
       font-family: Arial, sans-serif;
-      line-height: 1.5;
+      color: white;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 25%, rgba(236, 195, 95, 0.65), transparent 22%),
+        radial-gradient(circle at 35% 70%, rgba(190, 150, 70, 0.30), transparent 24%),
+        radial-gradient(circle at 72% 30%, rgba(110, 130, 125, 0.22), transparent 26%),
+        radial-gradient(circle at 85% 78%, rgba(140, 150, 145, 0.16), transparent 20%),
+        linear-gradient(120deg, #0b0a10 0%, #15161b 35%, #233138 68%, #2c4148 100%);
+      position: relative;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
+    body::before,
+    body::after {
+      content: "";
+      position: absolute;
+      inset: auto;
+      border-radius: 50%;
+      filter: blur(8px);
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    body::before {
+      width: 520px;
+      height: 520px;
+      left: -120px;
+      top: -60px;
+      background: rgba(221, 181, 89, 0.18);
+    }
+
+    body::after {
+      width: 460px;
+      height: 460px;
+      right: -120px;
+      bottom: -100px;
+      background: rgba(126, 145, 143, 0.14);
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 46% 54% 57% 43% / 42% 44% 56% 58%;
+      background: rgba(255, 255, 255, 0.05);
+      filter: blur(2px);
+      pointer-events: none;
+    }
+
+    .blob-1 {
+      width: 240px;
+      height: 240px;
+      top: -40px;
+      right: 80px;
+    }
+
+    .blob-2 {
+      width: 220px;
+      height: 220px;
+      bottom: -30px;
+      right: 120px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .blob-3 {
+      width: 180px;
+      height: 180px;
+      bottom: 40px;
+      left: -40px;
+      background: rgba(214, 176, 95, 0.10);
     }
 
     .hero {
-      min-height: 78vh;
+      min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      padding: 70px 20px 50px;
+      justify-content: center;
       text-align: center;
+      padding: 24px;
+      position: relative;
+      z-index: 2;
     }
 
-    .hero h1 {
-      font-size: 4rem;
-      letter-spacing: 4px;
-      font-weight: 800;
-      margin-bottom: 14px;
-    }
-
-    .hero p {
-      font-size: 1.05rem;
-      color: #c7c7c7;
-      max-width: 650px;
-      margin-bottom: 28px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 14px 24px;
-      background: #ffffff;
-      color: #000000;
-      border-radius: 999px;
-      font-weight: 700;
-      transition: 0.2s ease;
-    }
-
-    .btn:hover {
-      opacity: 0.85;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 2rem;
-      letter-spacing: 1px;
-      margin-bottom: 30px;
-    }
-
-    .portfolio {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 30px 20px 70px;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px;
-    }
-
-    .gallery img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      border-radius: 14px;
-      display: block;
-      background: #111111;
-    }
-
-    .about {
+    .hero-content {
       max-width: 900px;
-      margin: 0 auto;
-      padding: 10px 20px 70px;
-      text-align: center;
     }
 
-    .about p {
-      color: #c7c7c7;
-      font-size: 1rem;
+    h1 {
+      font-size: clamp(2.6rem, 7vw, 5rem);
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
     }
 
-    .booking {
-      text-align: center;
-      padding: 10px 20px 90px;
+    .raw-box {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.95);
+      color: #6f623f;
+      padding: 1px 10px 3px;
+      border-radius: 8px;
+      margin-left: 6px;
     }
 
-    .booking p {
-      color: #c7c7c7;
+    .tagline {
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      color: rgba(255, 255, 255, 0.92);
+      font-style: italic;
+      font-weight: 700;
       margin-bottom: 22px;
     }
 
-    .socials {
-      margin-top: 18px;
+    .button-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .socials a {
-      color: #c7c7c7;
+    .fake-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 104px;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.95);
+      color: #514833;
+      border-radius: 10px;
+      font-weight: 700;
       font-size: 0.98rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
     }
 
-    footer {
-      text-align: center;
-      padding: 24px 15px 36px;
-      color: #777777;
-      font-size: 0.92rem;
+    .footer {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.82);
+      z-index: 2;
+      white-space: nowrap;
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 600px) {
       .hero {
-        min-height: 68vh;
-        padding-top: 60px;
+        padding: 20px 16px;
       }
 
-      .hero h1 {
-        font-size: 2.7rem;
-        letter-spacing: 2px;
+      .fake-button {
+        min-width: 94px;
+        padding: 11px 16px;
       }
 
-      .hero p {
-        font-size: 0.98rem;
-      }
-
-      .gallery img {
-        height: 240px;
-      }
-
-      .section-title {
-        font-size: 1.6rem;
+      .raw-box {
+        margin-left: 4px;
       }
     }
   </style>
 </head>
 <body>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
 
-  <section class="hero">
-    <h1>CLEARSHOT RAW</h1>
-    <p>Sharp. Clean. Cinematic.</p>
-    <a class="btn" href="#booking">BOOK A SHOOT</a>
-  </section>
+  <main class="hero">
+    <div class="hero-content">
+      <h1>CLEARSHOT<span class="raw-box">RAW</span></h1>
+      <p class="tagline">Your vision, but better.</p>
 
-  <section class="portfolio">
-    <h2 class="section-title">PORTFOLIO</h2>
-    <div class="gallery">
-      <img src="photo1.jpg" alt="CLEARSHOT RAW photo 1">
-      <img src="photo2.jpg" alt="CLEARSHOT RAW photo 2">
-      <img src="photo3.jpg" alt="CLEARSHOT RAW photo 3">
-      <img src="photo4.jpg" alt="CLEARSHOT RAW photo 4">
-      <img src="photo5.jpg" alt="CLEARSHOT RAW photo 5">
-      <img src="photo6.jpg" alt="CLEARSHOT RAW photo 6">
+      <div class="button-row">
+        <div class="fake-button">Pictures</div>
+        <div class="fake-button">Booking</div>
+      </div>
     </div>
-  </section>
+  </main>
 
-  <section class="about">
-    <h2 class="section-title">ABOUT</h2>
-    <p>
-      CLEARSHOT RAW delivers bold photography with sharp detail, strong energy,
-      and a clean cinematic look. Built for standout sports, portraits, and
-      creative shoots.
-    </p>
-  </section>
-
-  <section class="booking" id="booking">
-    <h2 class="section-title">BOOK ME</h2>
-    <p>Ready to shoot? Reach out and let’s make something hard.</p>
-    <a class="btn" href="mailto:clearshotraw@gmail.com?subject=Booking Inquiry">EMAIL ME</a>
-
-    <div class="socials">
-      <a href="https://instagram.com/clearshot.raw" target="_blank">Instagram</a>
-    </div>
-  </section>
-
-  <footer>
-    © 2026 CLEARSHOT RAW
-  </footer>
-
+  <div class="footer">© 2026 CLEARSHOT RAW</div>
 </body>
 </html>
