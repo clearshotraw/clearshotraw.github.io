@@ -2,15 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio | CLEARSHOT RAW</title>
-
-  <meta name="theme-color" content="#0b0c0b">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -29,48 +22,27 @@
 
       --cream: #f4efe6;
       --soft-cream: rgba(244, 239, 230, 0.82);
-      --muted-cream: rgba(244, 239, 230, 0.56);
     }
 
-    html {
+    html, body {
       width: 100%;
       min-height: 100%;
-      margin: 0;
-      padding: 0;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(244,239,230,0.08), transparent 25%),
-        radial-gradient(circle at 80% 80%, rgba(168,180,163,0.08), transparent 25%),
-        linear-gradient(135deg, var(--bg-1), var(--bg-4));
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-attachment: fixed;
+      overflow-x: hidden;
     }
 
     body {
-      width: 100%;
-      min-height: 100dvh;
-      margin: 0;
-      padding: 0;
       font-family: "Inter", sans-serif;
       color: var(--cream);
-      overflow-x: hidden;
       background:
         radial-gradient(circle at 20% 20%, rgba(244,239,230,0.08), transparent 25%),
         radial-gradient(circle at 80% 80%, rgba(168,180,163,0.08), transparent 25%),
         linear-gradient(135deg, var(--bg-1), var(--bg-4));
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-attachment: fixed;
     }
 
     .page {
       max-width: 1100px;
-      margin: 0 auto;
-      padding:
-        calc(40px + env(safe-area-inset-top))
-        20px
-        calc(40px + env(safe-area-inset-bottom))
-        20px;
+      margin: auto;
+      padding: 40px 20px;
     }
 
     .topbar {
@@ -107,28 +79,62 @@
     }
 
     .card {
-      min-height: 220px;
+      position: relative;
+      height: 220px;
       border-radius: 24px;
       display: flex;
       align-items: flex-end;
       padding: 20px;
       text-decoration: none;
       color: var(--cream);
-      background: rgba(255,255,255,0.05);
+      overflow: hidden;
+
       border: 1px solid rgba(255,255,255,0.12);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      transition: all 0.25s ease;
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      transition: transform 0.25s ease, filter 0.25s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.2));
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      background: rgba(255,255,255,0.08);
+      transform: translateY(-5px) scale(1.02);
+      filter: brightness(1.05);
     }
 
     .card-label {
+      position: relative;
+      z-index: 1;
       font-size: 1.5rem;
       font-weight: 700;
+    }
+
+    /* 🔥 YOUR IMAGE FILES */
+    .sports {
+      background-image: url("sports-previewone.png");
+    }
+
+    .events {
+      background-image: url("events-previewone.png");
+    }
+
+    .cars {
+      background-image: url("cars-previewone.png");
+    }
+
+    .portraits {
+      background-image: url("portraits-previewone.png");
     }
 
     @media (max-width: 600px) {
@@ -143,26 +149,26 @@
   <div class="page">
     <div class="topbar">
       <a href="index.html">CLEARSHOT RAW</a>
-      <a href="index.html">Home</a>
+      <a href="index.html">HOME</a>
     </div>
 
     <h1>Portfolio</h1>
     <p class="subtext">Choose a category</p>
 
     <div class="grid">
-      <a href="sports.html" class="card">
+      <a href="#" class="card sports">
         <div class="card-label">SPORTS</div>
       </a>
 
-      <a href="events.html" class="card">
+      <a href="#" class="card events">
         <div class="card-label">EVENTS</div>
       </a>
 
-      <a href="cars.html" class="card">
+      <a href="#" class="card cars">
         <div class="card-label">CARS</div>
       </a>
 
-      <a href="portraits.html" class="card">
+      <a href="#" class="card portraits">
         <div class="card-label">PORTRAITS</div>
       </a>
     </div>
