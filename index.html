@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
 
-  <!-- 🔥 THIS LINE FIXES iPhone SAFE AREA -->
+  <!-- ONLY CHANGE: viewport fix -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <title>CLEARSHOT RAW</title>
@@ -30,109 +30,228 @@
       --sage: #a8b4a3;
       --sage-soft: rgba(168, 180, 163, 0.12);
 
+      --glass: rgba(255, 255, 255, 0.08);
+      --glass-strong: rgba(255, 255, 255, 0.11);
+      --glass-line: rgba(255, 255, 255, 0.18);
+      --shadow: rgba(0, 0, 0, 0.28);
+
       --mx: 50%;
       --my: 50%;
     }
 
-    /* 🔥 FORCE BACKGROUND EVERYWHERE */
-    html {
+    html, body {
+      width: 100%;
       height: 100%;
+    }
+
+    body {
+      /* 🔥 ONLY FIX HERE */
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+
+      overflow: hidden;
+      font-family: "Inter", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: var(--cream);
+
+      /* SAME EXACT BACKGROUND */
       background:
         radial-gradient(circle at 16% 22%, rgba(244, 239, 230, 0.09), transparent 22%),
         radial-gradient(circle at 30% 70%, rgba(244, 239, 230, 0.05), transparent 20%),
         radial-gradient(circle at 82% 78%, rgba(168, 180, 163, 0.10), transparent 22%),
         radial-gradient(circle at 78% 22%, rgba(255, 255, 255, 0.06), transparent 16%),
-        linear-gradient(135deg, var(--bg-1), var(--bg-4));
-    }
+        linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 28%, var(--bg-3) 68%, var(--bg-4) 100%);
 
-    body {
-      min-height: 100vh;
-      min-height: 100dvh; /* 🔥 modern fix */
-      font-family: "Inter", sans-serif;
-      color: var(--cream);
-
-      /* SAME BACKGROUND */
-      background: inherit;
-
+      position: relative;
+      isolation: isolate;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
 
-      /* 🔥 FIX SAFE AREAS (top/bottom bars) */
-      padding-top: env(safe-area-inset-top);
-      padding-bottom: env(safe-area-inset-bottom);
-      padding-left: env(safe-area-inset-left);
-      padding-right: env(safe-area-inset-right);
+    .ambient {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      pointer-events: none;
+      z-index: 0;
+    }
 
-      overflow: hidden;
-      position: relative;
+    .ambient.a1 {
+      width: 26rem;
+      height: 26rem;
+      top: -9rem;
+      left: -7rem;
+      background: rgba(244, 239, 230, 0.07);
+    }
+
+    .ambient.a2 {
+      width: 22rem;
+      height: 22rem;
+      right: -6rem;
+      bottom: -7rem;
+      background: rgba(168, 180, 163, 0.12);
+    }
+
+    .ambient.a3 {
+      width: 18rem;
+      height: 18rem;
+      right: 10rem;
+      top: 3rem;
+      background: rgba(255, 255, 255, 0.03);
+      filter: blur(80px);
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(10px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb.o1 {
+      width: 13rem;
+      height: 13rem;
+      top: -3rem;
+      right: 6rem;
+      opacity: 0.3;
+    }
+
+    .orb.o2 {
+      width: 9rem;
+      height: 9rem;
+      bottom: 4rem;
+      right: 9rem;
+      opacity: 0.2;
+    }
+
+    .orb.o3 {
+      width: 7rem;
+      height: 7rem;
+      left: -1rem;
+      bottom: 3rem;
+      opacity: 0.14;
+      background: rgba(168, 180, 163, 0.06);
     }
 
     .hero {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 72rem);
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
     }
 
+    .hero-inner {
+      width: 100%;
+      max-width: 62rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--muted-cream);
+      margin-bottom: 1.25rem;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-bottom: 1.15rem;
+    }
+
     .brand-main {
-      font-size: clamp(3rem, 8vw, 6rem);
+      font-size: clamp(3.2rem, 8vw, 6.4rem);
       font-weight: 700;
     }
 
     .raw-glass {
-      display: inline-block;
-      padding: 0.2em 0.5em;
-      border-radius: 12px;
+      padding: 0.12em 0.36em;
+      border-radius: 0.34em;
       backdrop-filter: blur(20px);
       background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.16);
     }
 
     .tagline {
-      margin-top: 1rem;
-      font-size: 1.2rem;
+      margin-bottom: 2rem;
       color: var(--soft-cream);
     }
 
     .button-row {
-      margin-top: 2rem;
       display: flex;
       gap: 1rem;
-      justify-content: center;
     }
 
-    .glass-btn, .solid-btn {
-      padding: 1rem 1.5rem;
+    .glass-btn,
+    .solid-btn {
+      padding: 1rem 1.4rem;
       border-radius: 999px;
       text-decoration: none;
       font-weight: 600;
     }
 
     .glass-btn {
-      background: rgba(255,255,255,0.08);
-      color: var(--cream);
+      background: rgba(255,255,255,0.06);
+      color: white;
     }
 
     .solid-btn {
-      background: var(--cream);
+      background: #f4efe6;
       color: black;
     }
 
+    .bottom-mark {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      color: rgba(244,239,230,0.4);
+    }
   </style>
 </head>
 
 <body>
+  <div class="ambient a1"></div>
+  <div class="ambient a2"></div>
+  <div class="ambient a3"></div>
+
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
 
   <main class="hero">
-    <div class="brand-main">
-      CLEARSHOT <span class="raw-glass">RAW</span>
-    </div>
+    <div class="hero-inner">
+      <div class="eyebrow">Photography Portfolio</div>
 
-    <p class="tagline">Your vision, but better.</p>
+      <div class="brand-row">
+        <div class="brand-main">CLEARSHOT</div>
+        <div class="raw-glass">RAW</div>
+      </div>
 
-    <div class="button-row">
-      <a href="pictures.html" class="glass-btn">Pictures</a>
-      <a href="booking.html" class="solid-btn">Booking</a>
+      <p class="tagline">Your vision, but better.</p>
+
+      <div class="button-row">
+        <a href="pictures.html" class="glass-btn">Pictures</a>
+        <a href="booking.html" class="solid-btn">Booking</a>
+      </div>
     </div>
   </main>
 
+  <div class="bottom-mark">© 2026 CLEARSHOT RAW</div>
 </body>
 </html>
